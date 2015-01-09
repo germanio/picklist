@@ -298,52 +298,38 @@ function fxPickListDest($compile, $templateCache){
 }
 
 var fxPickListTpl=
-"			  <div style=\"display: table;width:100%\" data-ng-form=\"fake\" data-picklist-form>"+
-"		<div style=\"display: table-row;\">"+
-"			<div style=\"display: table-cell; width: 40%;\">"+
-"				<select multiple size=\"5\" class=\"form-control\" data-ng-options=\"fake\" name=\"fake\" data-ng-model=\"picklist_src\" data-picklist-src>"+
-"				</select>"+
-"			</div>"+
-"			<div style=\"display: table-cell; width: 10%; vertical-align: middle;\" class=\"btn-group-vertical\">"+
-"				<div>"+
-"					<button type=\"button\" class=\"btn btn-info\" data-ng-click=\"rightShift();\">"+
-"						<span class=\"glyphicon glyphicon-step-forward\"></span>"+
-"					</button>"+
-"				</div>"+
-"				<div>"+
-"					<button type=\"button\" class=\"btn btn-default\" data-ng-click=\"rightShiftAll();\">"+
-"						<span class=\"glyphicon glyphicon-fast-forward\"></span>"+
-"					</button>"+
-"				</div>"+
-"				<div>"+
-"					<button type=\"button\" class=\"btn btn-info\" data-ng-click=\"leftShift();\">"+
-"						<span class=\"glyphicon glyphicon-step-backward\"></span>"+
-"					</button>"+
-"				</div>"+
-"				<div>"+
-"					<button type=\"button\" class=\"btn btn-default\" data-ng-click=\"leftShiftAll();\">"+
-"						<span class=\"glyphicon glyphicon-fast-backward\"></span>"+
-"					</button>"+
-"				</div>"+
-"			</div>"+
-"			<div style=\"display: table-cell; width: 40%;\">"+
-"				<select multiple size=\"5\" class=\"form-control\" data-ng-options=\"fake\" name=\"fake\" data-ng-model=\"picklist_dest\" data-picklist-dest>"+
-"				</select>"+
-"			</div>"+
-"			<div style=\"display: table-cell; width: 10%; vertical-align: middle;\" class=\"btn-group-vertical\">"+
-"				<div>"+
-"					<button type=\"button\" class=\"btn btn-default\" data-ng-click=\"arrowUp();\">"+
-"						<span class=\"glyphicon glyphicon-arrow-up\"></span>"+
-"					</button>"+
-"				</div>"+
-"				<div>"+
-"					<button type=\"button\" class=\"btn btn-default\" data-ng-click=\"arrowDown();\">"+
-"						<span class=\"glyphicon glyphicon-arrow-down\"></span>"+
-"					</button>"+
-"				</div>"+
-"			</div>"+
-"		</div>"+
-"	</div>	  "
+"              <div class=\"row\" data-ng-form=\"fake\" data-picklist-form>"+
+"            <div class=\"col-xs-4\">"+
+"                <select multiple size=\"5\" class=\"form-control\" data-ng-options=\"fake\" name=\"fake\" data-ng-model=\"picklist_src\" data-picklist-src>"+
+"                </select>"+
+"            </div>"+
+"            <div class=\"col-xs-2 btn-group-vertical\">"+
+"                    <button type=\"button\" class=\"btn btn-info btn-sm\" data-ng-click=\"rightShift();\">"+
+"                        <span class=\"glyphicon glyphicon-step-forward\"></span>"+
+"                    </button>"+
+"                    <button type=\"button\" class=\"btn btn-default btn-sm\" data-ng-click=\"rightShiftAll();\">"+
+"                        <span class=\"glyphicon glyphicon-fast-forward\"></span>"+
+"                    </button>"+
+"                    <button type=\"button\" class=\"btn btn-info btn-sm\" data-ng-click=\"leftShift();\">"+
+"                        <span class=\"glyphicon glyphicon-step-backward\"></span>"+
+"                    </button>"+
+"                    <button type=\"button\" class=\"btn btn-default btn-sm\" data-ng-click=\"leftShiftAll();\">"+
+"                        <span class=\"glyphicon glyphicon-fast-backward\"></span>"+
+"                    </button>"+
+"            </div>"+
+"            <div class=\"col-xs-4\">"+
+"                <select multiple size=\"5\" class=\"form-control\" data-ng-options=\"fake\" name=\"fake\" data-ng-model=\"picklist_dest\" data-picklist-dest>"+
+"                </select>"+
+"            </div>"+
+"            <div class=\"col-xs-2 btn-group-vertical\">"+
+"                    <button type=\"button\" class=\"btn btn-default btn-sm\" data-ng-click=\"arrowUp();\">"+
+"                        <span class=\"glyphicon glyphicon-arrow-up\"></span>"+
+"                    </button>"+
+"                    <button type=\"button\" class=\"btn btn-default btn-sm\" data-ng-click=\"arrowDown();\">"+
+"                        <span class=\"glyphicon glyphicon-arrow-down\"></span>"+
+"                    </button>"+
+"            </div>"+
+"    </div>      "
 ;
 
 		
