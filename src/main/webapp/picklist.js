@@ -1,4 +1,10 @@
+/*!
+ * germanio/picklist (https://github.com/germanio/picklist)
+ * a fork from jasonzhang2022/picklist (https://github.com/jasonzhang2022/picklist)
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
 
+'use strict';
 		
 function fxPickList($compile, $templateCache){
 	
@@ -10,7 +16,7 @@ function fxPickList($compile, $templateCache){
 	return {
 		replace:true,
 		priority:99,
-		templateUrl:"picklist.html",
+		templateUrl:'picklist.html',
 		restrict: 'E',
 		terminal:false,
 		scope:true, //do not pollute parent scope
@@ -36,7 +42,7 @@ function fxPickList($compile, $templateCache){
 			 * model directive is never processed.
 			 * The new ctrl is the subform.
 			 */
-			 delete($attrs['ngModel']);
+			 delete($attrs.ngModel);
 	         $element.removeAttr('data-ng-model');
 	         $element.removeAttr('ng-model');
 			
@@ -63,7 +69,7 @@ function fxPickList($compile, $templateCache){
 			var modelFn=$parse($scope.ngModel);
 			var models=modelFn($scope);
 			//give models an empty array if needed.
-			if (!angular.isDefined(models) || models==null){
+			if (!angular.isDefined(models) || models===null){
 				modelFn.assign($scope, []);
 			}
 			
@@ -161,17 +167,17 @@ function fxPickList($compile, $templateCache){
 				}
 			};
 			$scope.arrowUp=function(){
-				var idxs=new Array();
+				var idxs=[];
 				for (var i=0; i<$scope.picklist_dest.length; i++){
 					for (var j=0; j<$scope.destoptions.length; j++){
-						if($scope.picklist_dest[i]==$scope.destoptions[j]){
+						if($scope.picklist_dest[i]===$scope.destoptions[j]){
 							idxs.push(j);
 						}
 					}
 				}
 				idxs.sort();
-				for (var i=0; i<idxs.length; i++){
-					var idx=idxs[i];
+				for (var ii=0; ii<idxs.length; ii++){
+					var idx=idxs[ii];
 					if (idx>0){
 						var temp=$scope.destoptions[idx-1];
 						$scope.destoptions[idx-1]=$scope.destoptions[idx];
@@ -186,17 +192,17 @@ function fxPickList($compile, $templateCache){
 				});
 			};
 			$scope.arrowDown=function(){
-				var idxs=new Array();
+				var idxs=[];
 				for (var i=0; i<$scope.picklist_dest.length; i++){
 					for (var j=0; j<$scope.destoptions.length; j++){
-						if($scope.picklist_dest[i]==$scope.destoptions[j]){
+						if($scope.picklist_dest[i]===$scope.destoptions[j]){
 							idxs.push(j);
 						}
 					}
 				}
 				idxs.sort();
-				for (var i=idxs.length-1; i>=0; i--){
-					var idx=idxs[i];
+				for (var ii=idxs.length-1; ii>=0; ii--){
+					var idx=idxs[ii];
 					if (idx<$scope.destoptions.length-1){
 						var temp=$scope.destoptions[idx+1];
 						$scope.destoptions[idx+1]=$scope.destoptions[idx];
@@ -241,7 +247,7 @@ function fxPickListForm($compile, $templateCache){
 	 * 2. dest inst to put the select values: ng-model
 	 */
 	return {
-		require: "^picklist",
+		require: '^picklist',
 		priority:99,
 		restrict: 'A',
 		controller: function($scope, $element, $attrs){
@@ -262,16 +268,16 @@ function fxPickListSrc($compile, $templateCache){
 	 * 2. dest inst to put the select values: ng-model
 	 */
 	return {
-		require: "^picklist",
+		require: '^picklist',
 		priority:99,
 		restrict: 'A',
 		controller: function($scope, $element, $attrs){
 			$attrs.ngOptions=$scope.ngOptions;
 			$attrs.size=$scope.size;
-			$element.attr("size", $scope.size);
-			$attrs.name=$scope.formname+"_src";
+			$element.attr('size', $scope.size);
+			$attrs.name=$scope.formname+'_src';
 			//always use item as value.
-			$attrs.ngOptions=$scope.ngOptions.replace($scope.srcoptionsExp, "srcoptions").replace(/^.+\s+as\s+/, "");
+			$attrs.ngOptions=$scope.ngOptions.replace($scope.srcoptionsExp, 'srcoptions').replace(/^.+\s+as\s+/, '');
 		}
 	};
 }
@@ -284,62 +290,62 @@ function fxPickListDest($compile, $templateCache){
 	 * 2. dest inst to put the select values: ng-model
 	 */
 	return {
-		require: "^picklist",
+		require: '^picklist',
 		priority:99,
 		restrict: 'A',
 		controller: function($scope, $element, $attrs){
 			$attrs.size=$scope.size;
-			$element.attr("size", $scope.size);
+			$element.attr('size', $scope.size);
 			//always use item as value. real valye is synchoinized to model by watcher function
-			$attrs.ngOptions=$scope.ngOptions.replace($scope.srcoptionsExp, "destoptions").replace(/^.+\s+as\s+/, "");
-			$attrs.name=$scope.formname+"_dest";
+			$attrs.ngOptions=$scope.ngOptions.replace($scope.srcoptionsExp, 'destoptions').replace(/^.+\s+as\s+/, '');
+			$attrs.name=$scope.formname+'_dest';
 		}
 	};
 }
 
 var fxPickListTpl=
-"              <div class=\"row\" data-ng-form=\"fake\" data-picklist-form>"+
-"            <div class=\"col-xs-4\">"+
-"                <select multiple size=\"5\" class=\"form-control\" data-ng-options=\"fake\" name=\"fake\" data-ng-model=\"picklist_src\" data-picklist-src>"+
-"                </select>"+
-"            </div>"+
-"            <div class=\"col-xs-2 btn-group-vertical\">"+
-"                    <button type=\"button\" class=\"btn btn-info btn-sm\" data-ng-click=\"rightShift();\">"+
-"                        <span class=\"glyphicon glyphicon-step-forward\"></span>"+
-"                    </button>"+
-"                    <button type=\"button\" class=\"btn btn-default btn-sm\" data-ng-click=\"rightShiftAll();\">"+
-"                        <span class=\"glyphicon glyphicon-fast-forward\"></span>"+
-"                    </button>"+
-"                    <button type=\"button\" class=\"btn btn-info btn-sm\" data-ng-click=\"leftShift();\">"+
-"                        <span class=\"glyphicon glyphicon-step-backward\"></span>"+
-"                    </button>"+
-"                    <button type=\"button\" class=\"btn btn-default btn-sm\" data-ng-click=\"leftShiftAll();\">"+
-"                        <span class=\"glyphicon glyphicon-fast-backward\"></span>"+
-"                    </button>"+
-"            </div>"+
-"            <div class=\"col-xs-4\">"+
-"                <select multiple size=\"5\" class=\"form-control\" data-ng-options=\"fake\" name=\"fake\" data-ng-model=\"picklist_dest\" data-picklist-dest>"+
-"                </select>"+
-"            </div>"+
-"            <div class=\"col-xs-2 btn-group-vertical\">"+
-"                    <button type=\"button\" class=\"btn btn-default btn-sm\" data-ng-click=\"arrowUp();\">"+
-"                        <span class=\"glyphicon glyphicon-arrow-up\"></span>"+
-"                    </button>"+
-"                    <button type=\"button\" class=\"btn btn-default btn-sm\" data-ng-click=\"arrowDown();\">"+
-"                        <span class=\"glyphicon glyphicon-arrow-down\"></span>"+
-"                    </button>"+
-"            </div>"+
-"    </div>      "
+'              <div class=\"row\" data-ng-form=\"fake\" data-picklist-form>'+
+'            <div class=\"col-xs-5\">'+
+'                <select multiple size=\"5\" class=\"form-control\" data-ng-options=\"fake\" name=\"fake\" data-ng-model=\"picklist_src\" data-picklist-src>'+
+'                </select>'+
+'            </div>'+
+'            <div class=\"col-xs-1\">'+
+'                    <button type=\"button\" class=\"btn btn-info btn-sm\" data-ng-click=\"rightShift();\">'+
+'                        <span class=\"glyphicon glyphicon-step-forward\"></span>'+
+'                    </button>'+
+'                    <button type=\"button\" class=\"btn btn-default btn-sm\" data-ng-click=\"rightShiftAll();\">'+
+'                        <span class=\"glyphicon glyphicon-fast-forward\"></span>'+
+'                    </button>'+
+'                    <button type=\"button\" class=\"btn btn-info btn-sm\" data-ng-click=\"leftShift();\">'+
+'                        <span class=\"glyphicon glyphicon-step-backward\"></span>'+
+'                    </button>'+
+'                    <button type=\"button\" class=\"btn btn-default btn-sm\" data-ng-click=\"leftShiftAll();\">'+
+'                        <span class=\"glyphicon glyphicon-fast-backward\"></span>'+
+'                    </button>'+
+'            </div>'+
+'            <div class=\"col-xs-5\">'+
+'                <select multiple size=\"5\" class=\"form-control\" data-ng-options=\"fake\" name=\"fake\" data-ng-model=\"picklist_dest\" data-picklist-dest>'+
+                    '<option value=\"none\" disabled>disabled</option>'+
+'                </select>'+
+'            </div>'+
+'            <div class=\"col-xs-1\">'+
+'                    <button type=\"button\" class=\"btn btn-default btn-sm\" data-ng-click=\"arrowUp();\">'+
+'                        <span class=\"glyphicon glyphicon-arrow-up\"></span>'+
+'                    </button>'+
+'                    <button type=\"button\" class=\"btn btn-default btn-sm\" data-ng-click=\"arrowDown();\">'+
+'                        <span class=\"glyphicon glyphicon-arrow-down\"></span>'+
+'                    </button>'+
+'            </div>'+
+'    </div>      '
 ;
 
 		
 
-angular.module("fxpicklist", [])
-.directive("picklist", fxPickList)
-.directive("picklistForm", fxPickListForm)
-.directive("picklistSrc", fxPickListSrc) 
-.directive("picklistDest", fxPickListDest)
-.run(["$templateCache", function($templateCache) {
-	 $templateCache.put("picklist.html", fxPickListTpl);
+angular.module('fxpicklist', [])
+.directive('picklist', fxPickList)
+.directive('picklistForm', fxPickListForm)
+.directive('picklistSrc', fxPickListSrc)
+.directive('picklistDest', fxPickListDest)
+.run(['$templateCache', function($templateCache) {
+	 $templateCache.put('picklist.html', fxPickListTpl);
 }]);
-	 
